@@ -34,11 +34,3 @@ Este proyecto es una simulación de redes de páginas web que utiliza el algorit
 * **Reportar errores:** Reporta cualquier error que encuentres en el proyecto.
 * **Sugerir mejoras:** Sugerir mejoras para el proyecto.
 * **Contribuir con código:** Contribuir con código para mejorar el proyecto.
-
-**Licencia:**
-
-* **MIT:** El proyecto está licenciado bajo la licencia MIT.
-
-**Autor:**
-
-* **[Tu nombre]:** Soy el autor del proyecto.
