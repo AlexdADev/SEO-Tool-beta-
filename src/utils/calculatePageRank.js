@@ -1,3 +1,13 @@
+//El componente calculatePageRank es una implementación del 
+// algoritmo PageRank, que es utilizado para asignar una 
+// puntuación de importancia a cada página en un grafo de 
+// páginas web (o nodos en un grafo en general). Este algoritmo 
+// fue desarrollado originalmente por los fundadores de Google,
+//  Larry Page y Sergey Brin, para clasificar páginas web en 
+// los resultados de búsqueda.
+
+
+
 const calculatePageRank = (pages, iterations = 100, dampingFactor = 0.85) => {
     const pageRank = {};
     const numPages = Object.keys(pages).length;

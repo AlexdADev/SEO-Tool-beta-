@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Network from './Network';
 import calculatePageRank from '../utils/calculatePageRank';
+import './estilos.css'
+import GeminiComponent from './new/GeminiComponent';
+
+//Este componente PageRankApp es una aplicación React que simula el algoritmo PageRank 
+// para calcular la importancia de páginas (o nodos) en una red de enlaces.
+//  La aplicación permite a los usuarios agregar páginas,
+//  definir sus enlaces salientes y visualizar el ranking de 
+// importancia de cada página, así como una representación gráfica de la red de páginas.
 
 const PageRankApp = () => {
-    // Estado para almacenar la información de las páginas
     const [pages, setPages] = useState({});
-
-    // Estado para almacenar el nombre de la nueva página
     const [newPage, setNewPage] = useState('');
-
-    // Estado para almacenar los enlaces seleccionados para la nueva página
     const [selectedLinks, setSelectedLinks] = useState([]);
-
-    // Estado para almacenar el ranking de las páginas
     const [pageRank, setPageRank] = useState({});
 
     // Efecto para calcular el ranking de las páginas cuando cambia el estado de las páginas
@@ -50,24 +51,24 @@ const PageRankApp = () => {
     return (
         // Sección de título y descripción
         <>
-            <div className="container-fluid bg-info p-5">
+            <div className="container-fluid bg-dark-95 p-5">
                 <div className="row">
                     <div className="col-md-12">
-                        <h1 className="text-center mt-5 mb-5 text-white font-weight-bold">Simulación de PageRank</h1>
-                        <p className="text-center mb-5 text-white">
-                            "Optimiza tu contenido, mejora tu visibilidad y alcanza nuevas alturas en el mundo digital.
-                            Con nuestra herramienta de simulación de PageRank, cada enlace cuenta y cada página tiene su voz."
+                        <h1 className="text-center mt-5 mb-5 text-green-500 font-weight-bold">Simulador de PageRank</h1>
+                        <p className="text-center mb-5 text-gray-600">
+                            "Simulador de PageRank: Medir el interlink interno y planificar la estructura de tu web"
+                            <br /> La nueva página puede tener enlaces que salen hacia otras páginas que ya están en la red y de esta manera se hace una simulacion de interlinks
                         </p>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <div className="card border-0 bg-light shadow-sm">
+                        <div className="card border-0 bg-white shadow-sm">
                             <div className="card-body">
-                                <h5 className="card-title font-weight-bold text-primary">Agregar Página</h5>
+                                <h5 className="card-title font-weight-bold text-green-500">Agregar Página</h5>
                                 <form>
                                     <div className="form-group">
-                                        <label className="text-secondary">Nombre de la página</label>
+                                        <label className="text-gray-600">Nombre de la página</label>
                                         <input
                                             type="text"
                                             className="form-control border-0 shadow-sm"
@@ -78,7 +79,7 @@ const PageRankApp = () => {
                                     </div>
                                     {Object.keys(pages).length > 0 && (
                                         <div className="form-group">
-                                            <label className="text-secondary">Enlaces seleccionados</label>
+                                            <label className="text-gray-600">Enlaces seleccionados</label>
                                             <select
                                                 multiple
                                                 className="form-control border-0 shadow-sm"
@@ -100,7 +101,7 @@ const PageRankApp = () => {
                                     <br />
                                     <button
                                         type="button"
-                                        className="btn btn-primary shadow-sm"
+                                        className="btn btn-green-500 shadow-sm"
                                         onClick={handleAddPage}
                                         disabled={newPage === ''}
                                     >
@@ -109,9 +110,9 @@ const PageRankApp = () => {
                                 </form>
                             </div>
                         </div>
-                        <div className="card mt-5 border-0 bg-light shadow-sm">
+                        <div className="card mt-5 border-0 bg-white shadow-sm">
                             <div className="card-body">
-                                <h5 className="card-title font-weight-bold text-primary">Páginas Agregadas</h5>
+                                <h5 className="card-title font-weight-bold text-green-500">Páginas Agregadas</h5>
                                 <ul>
                                     {Object.entries(pages).map(([page, links]) => (
                                         <li key={page}>
@@ -121,9 +122,9 @@ const PageRankApp = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="card mt-5 border-0 bg-light shadow-sm">
+                        <div className="card mt-5 border-0 bg-white shadow-sm">
                             <div className="card-body">
-                                <h5 className="card-title font-weight-bold text-primary">Resultados</h5>
+                                <h5 className="card-title font-weight-bold text-green-500">Resultados</h5>
                                 <ul>
                                     {sortedPageRank.map(([page, rank]) => (
                                         <li key={page}>
@@ -135,14 +136,21 @@ const PageRankApp = () => {
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="card border-0 bg-light shadow-sm">
+                        <div className="card border-0 bg-white shadow-sm">
                             <div className="card-body">
-                                <h5 className="card-title font-weight-bold text-primary">Red de Páginas</h5>
-                                <Network pages={pages} />
+                                <h5 className="card-title font-weight-bold text-green-500">Red de Páginas</h5>
+                                <div className="network-container" style={{ overflow: 'auto' }}>
+                                    <Network pages={pages} />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <GeminiComponent
+                    pages={pages}
+                    pageRank={pageRank}
+                    selectedLinks={selectedLinks}
+                />
             </div>
         </>
     );

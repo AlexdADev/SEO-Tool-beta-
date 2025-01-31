@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
+//En resumen, este componente toma un objeto que representa páginas y sus enlaces, 
+// y utiliza D3.js para renderizar una visualización de red interactiva en un SVG.
+//  Los nodos representan las páginas, y los enlaces representan las conexiones entre ellas. 
+// La simulación de fuerzas de D3.js se encarga de posicionar los nodos y enlaces de manera dinámica y atractiva.
+
+
 const Network = ({ pages }) => {
   const svgRef = useRef();
   const [nodes, setNodes] = useState([]);
@@ -52,7 +58,7 @@ const Network = ({ pages }) => {
 
     // Actualizar la posición de nodos y enlaces
     const simulation = d3.forceSimulation(nodesData)
-      .force("link", d3.forceLink().id((d) => d.id).distance(100))
+      .force("link", d3.forceLink().id((d) => d.id).distance(70))
       .force("charge", d3.forceManyBody().strength(-200))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .on("tick", () => {
