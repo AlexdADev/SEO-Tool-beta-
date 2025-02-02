@@ -5,7 +5,7 @@ import PageRankResults from './PageRankResults';
 import NetworkVisualization from './NetworkVisualization';
 import GeminiComponent from '../GeminiComponent/GeminiComponent';
 import calculatePageRank from '../../utils/calculatePageRank';
-import { downloadSummaryPDF } from '../../utils/pdfGenerator'; // Función para generar el PDF
+import { downloadSummaryPDF } from '../../utils/pdfGenerator';
 import './style/PageRankApp.css';
 
 const PageRankApp = () => {
@@ -16,6 +16,24 @@ const PageRankApp = () => {
         const updatedPageRank = calculatePageRank(pages);
         setPageRank(updatedPageRank);
     }, [pages]);
+
+    // Función para editar una página
+    const handleEditPage = (oldPageName, newPageName) => {
+        const updatedPages = { ...pages };
+
+        // Actualizar el nombre de la página
+        updatedPages[newPageName] = updatedPages[oldPageName];
+        delete updatedPages[oldPageName];
+
+        // Actualizar los enlaces internos
+        Object.keys(updatedPages).forEach(page => {
+            updatedPages[page] = updatedPages[page].map(link =>
+                link === oldPageName ? newPageName : link
+            );
+        });
+
+        setPages(updatedPages);
+    };
 
     return (
         <div className="container-fluid bg-dark-95 p-5">
@@ -28,7 +46,7 @@ const PageRankApp = () => {
             <div className="row">
                 <div className="col-md-6">
                     <AddPageForm pages={pages} setPages={setPages} />
-                    <PageList pages={pages} setPages={setPages} />
+                    <PageList pages={pages} setPages={setPages} onEditPage={handleEditPage} />
                     <PageRankResults pageRank={pageRank} />
                 </div>
                 <div className="col-md-6">
